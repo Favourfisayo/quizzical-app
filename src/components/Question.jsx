@@ -3,18 +3,17 @@ import React from 'react'
 const Question = ({question, validateAnswers, correctAnswer, questionId, options, selectedOptions, setSelectedOptions}) => {
 
   function handleOption(option, id) {
+    if (!validateAnswers) {
       setSelectedOptions((prev) => {
         return {
           ...prev,
           [id]: option,
         }
       })
+    }
   }
   const selectedOption = selectedOptions[questionId]
 
-  const removeEvent = (event) => {
-    event.target.removeEventListener("click", handleOption)
-  }
   return (
     <>
         <div className='flex flex-col items-start sm:w-1/2 w-5/6 gap-3'>
@@ -57,7 +56,7 @@ const Question = ({question, validateAnswers, correctAnswer, questionId, options
 
               type='button' 
               key={id} 
-              onClick={(e) => {validateAnswers ? removeEvent(e) : handleOption(option, questionId)}}
+              onClick={() => handleOption(option, questionId)}
               className='font-inter px-1.5 py-1 rounded-[7.94px] font-medium border-1 border-light-purple text-xs text-light-blue rounded-sm5'>
 
               {option}
@@ -66,7 +65,7 @@ const Question = ({question, validateAnswers, correctAnswer, questionId, options
             )
               })}
             </div>
-        </div>
+            </div>
     </>
   )
 }

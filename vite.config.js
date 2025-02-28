@@ -7,6 +7,9 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss()
-
   ],
+  build: {
+    outDir: 'dist', // specify the output directory
+    sourcemap: true, // generate source maps for debugging
+  },
 })

@@ -56,12 +56,13 @@ useEffect(() => {
 
   const checkAnswers = () => {
     setValidateAnswers(true)
+    let newScore = 0
     Object.keys(selectedOptions).forEach(questionId => {
       if(selectedOptions[questionId] === correctAnswers[questionId]){
-        
-        setScore(prev => prev + 1)
+        newScore += 1
       }
     })
+    setScore(newScore)
   }
 
   
